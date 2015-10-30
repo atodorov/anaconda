@@ -35,6 +35,6 @@ export top_builddir
 export ANACONDA_WIDGETS_OVERRIDES="${top_srcdir}/widgets/python"
 export UIPATH="${top_srcdir}/pyanaconda/ui/gui/"
 export GLADE_CATALOG_SEARCH_PATH="${top_srcdir}/widgets/glade"
-export GLADE_MODULE_SEARCH_PATH="${top_srcdir}/widgets/src/.libs"
+export GLADE_MODULE_SEARCH_PATH="${top_builddir}/widgets/src/.libs"
 export ANACONDA_DATA="${top_srcdir}/data"
 export ANACONDA_WIDGETS_DATA="${top_srcdir}/widgets/data"
