@@ -176,6 +176,7 @@ class GUIObject(common.UIObject):
         path = os.environ.get("UIPATH", "./:/tmp/updates/:/tmp/updates/ui/:/usr/share/anaconda/ui/")
         dirs = path.split(":")
 
+        print("***** path ", path, self.uiFile)
         # append the directory where this UIObject is defined
         dirs.append(os.path.dirname(inspect.getfile(self.__class__)))
 
@@ -633,7 +634,7 @@ class GraphicalUserInterface(UserInterface):
         ANACONDA_WINDOW_GROUP.add_window(self.mainWindow)
 
     basemask = "pyanaconda.ui"
-    basepath = os.path.dirname(__file__)
+    basepath = os.path.dirname(os.path.dirname(__file__))
     updatepath = "/tmp/updates/pyanaconda/ui"
     sitepackages = [os.path.join(dir, "pyanaconda", "ui")
                     for dir in site.getsitepackages()]
