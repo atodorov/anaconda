@@ -18,6 +18,18 @@
 #
 # Red Hat Author(s): Chris Lumens <clumens@redhat.com>
 
+
+if [ -z "$top_srcdir" ]; then
+    echo "*** top_srcdir must be set"
+    exit 1
+fi
+
+. ${top_srcdir}/tests/testenv.sh
+export
+${top_srcdir}/anaconda -G --dirinstall /var/tmp/anaconda-install/
+
+exit 0
+
 function doit() {
     ARGS="-s \
           -v \
