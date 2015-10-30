@@ -165,6 +165,19 @@ runglade:
 	GLADE_MODULE_SEARCH_PATH=$(builddir)/widgets/src/.libs \
 	glade ${GLADE_FILE}
 
+runanaconda:
+	ANACONDA_DATA=$(srcdir)/data \
+	ANACONDA_WIDGETS_OVERRIDES=$(srcdir)/widgets/python \
+	ANACONDA_WIDGETS_DATA=$(srcdir)/widgets/data \
+	ANACONDA_INSTALL_CLASSES=$(srcdir)/pyanaconda/installclasses \
+	PYTHONPATH=$(srcdir):$(builddir)/pyanaconda/isys/.libs:$(srcdir)/widgets/python/:$(builddir)/widgets/src/.libs/ \
+	LD_LIBRARY_PATH=$(builddir)/widgets/src/.libs \
+	UIPATH=$(srcdir)/pyanaconda/ui/gui/ \
+	GI_TYPELIB_PATH=$(builddir)/widgets/src/ \
+	GLADE_CATALOG_SEARCH_PATH=$(srcdir)/widgets/glade \
+	GLADE_MODULE_SEARCH_PATH=$(builddir)/widgets/src/.libs \
+	$(srcdir)/anaconda -G --dirinstall /var/tmp/anaconda-install/
+
 ci: rc-release
 	@mkdir -p $(USER_SITE_PACKAGES)
 	@cp $(abs_builddir)/tests/usercustomize.py $(USER_SITE_PACKAGES)
