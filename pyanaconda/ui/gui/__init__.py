@@ -176,7 +176,6 @@ class GUIObject(common.UIObject):
         path = os.environ.get("UIPATH", "./:/tmp/updates/:/tmp/updates/ui/:/usr/share/anaconda/ui/")
         dirs = path.split(":")
 
-        print("***** path ", path, self.uiFile)
         # append the directory where this UIObject is defined
         dirs.append(os.path.dirname(inspect.getfile(self.__class__)))
 
