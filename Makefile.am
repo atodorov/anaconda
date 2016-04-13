@@ -202,6 +202,20 @@ ci: rc-release
 	@sudo rm -f $(ROOT_SITE_PACKAGES)/usercustomize.py
 	$(MAKE) coverage-report
 
+test-gui:
+	@rm -f tests/test-suite.log
+	@rm -rf autogui-results-*/
+	@sudo mkdir -p $(ROOT_SITE_PACKAGES)
+	@sudo cp $(abs_builddir)/tests/usercustomize.py $(ROOT_SITE_PACKAGES)
+	# We require SELinux in Permissive mode, see rhbz#1276376
+	@sudo setenforce 0
+	@sudo COVERAGE_PROCESS_START=$(abs_builddir)/.coveragerc \
+		$(abs_builddir)/tests/run_gui_tests.sh >tests/test-suite.log 2>&1
+	@sudo setenforce 1
+	@sudo rm -f $(ROOT_SITE_PACKAGES)/usercustomize.py
+	@cat tests/test-suite.log
+	$(MAKE) coverage-report
+
 coverage-report:
 	$(COVERAGE) combine tests/.coverage.*
 	$(COVERAGE) report --omit "tests/*" > tests/coverage-report.log
